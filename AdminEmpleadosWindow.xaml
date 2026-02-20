@@ -1,0 +1,42 @@
+﻿<Window x:Class="WPFModuloCuadre.AdminEmpleadosWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:WPFModuloCuadre.Converters"
+        xmlns:models="clr-namespace:WPFModuloCuadre.Models"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        Title="Administración de Empleados" Height="450" Width="600"
+        WindowStartupLocation="CenterOwner" Background="#F4F6F6">
+    <Grid Margin="15">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <GroupBox Header="EMPLEADOS ACTIVOS" BorderBrush="#90A4AE">
+            <ListBox x:Name="ListEmpleados" DisplayMemberPath="Nombre" 
+                     SelectionChanged="ListEmpleados_SelectionChanged" Margin="5"/>
+        </GroupBox>
+
+        <StackPanel Grid.Column="1" Margin="15,0,0,0">
+            <TextBlock Text="NOMBRE COMPLETO:" FontWeight="Bold" Foreground="#455A64" Margin="0,0,0,5"/>
+            <TextBox x:Name="TxtNombre" Padding="5" Margin="0,0,0,15"/>
+
+            <TextBlock Text="ÁREA ASIGNADA:" FontWeight="Bold" Foreground="#455A64" Margin="0,0,0,5"/>
+            <ComboBox x:Name="ComboRol" Padding="5" Margin="0,0,0,25">
+                <ComboBoxItem Content="Pista"/>
+                <ComboBoxItem Content="Tienda"/>
+            </ComboBox>
+
+            <Button x:Name="BtnGuardar" Content="💾 GUARDAR CAMBIOS" Background="#2E7D32" 
+                    Height="35" Click="BtnGuardar_Click" Margin="0,0,0,10"/>
+
+            <Button x:Name="BtnNuevo" Content="➕ NUEVO EMPLEADO" Background="#0277BD" 
+                    Height="35" Click="BtnNuevo_Click" Margin="0,0,0,10"/>
+
+            <Separator Margin="0,10"/>
+
+            <Button x:Name="BtnEliminar" Content="🗑️ RETIRAR EMPLEADO" Background="#C62828" 
+                    Height="35" Click="BtnEliminar_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

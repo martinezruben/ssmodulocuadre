@@ -1,0 +1,75 @@
+﻿<Window x:Class="WPFModuloCuadre.HistorialWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Historial de Cierres de Turno" Height="700" Width="1100"
+        WindowStartupLocation="CenterOwner" Background="#ECEFF1">
+    <Grid Margin="15">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <GroupBox Header="TURNOS RECIENTES" BorderBrush="#90A4AE">
+            <ListBox x:Name="ListTurnos" ItemsSource="{Binding Turnos}" 
+                     DisplayMemberPath="DisplayTitle"
+                     SelectionChanged="ListTurnos_SelectionChanged"
+                     Margin="5" Background="#FAFAFA"/>
+        </GroupBox>
+
+        <Grid Grid.Column="1" Margin="15,0,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Border Background="White" Padding="15" CornerRadius="8" BorderBrush="#CFD8DC" BorderThickness="1">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Resumen de Venta en Pista: " FontSize="16" Foreground="#455A64"/>
+                    <TextBlock x:Name="TxtTotalPista" Text="$0.00" FontSize="18" FontWeight="Black" Foreground="#2E7D32"/>
+                </StackPanel>
+            </Border>
+
+            <ScrollViewer Grid.Row="1" Margin="0,15,0,0">
+                <ItemsControl x:Name="ItemsDetalleOperarios">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Background="White" Margin="0,0,0,10" Padding="15" CornerRadius="6" BorderBrush="#CFD8DC" BorderThickness="1">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="200"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="150"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding NombreOperario}" FontWeight="Black" FontSize="14" Foreground="#1565C0"/>
+                                        <TextBlock Text="{Binding Rol, StringFormat='Rol: {0}'}" FontSize="11" Foreground="#78909C"/>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="1" Margin="20,0">
+                                        <TextBlock Text="Desglose de Entregas:" FontWeight="Bold" Margin="0,0,0,5"/>
+                                        <ItemsControl ItemsSource="{Binding PagosDetallados}">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="{Binding Categoria}" Width="80" FontSize="11"/>
+                                                        <TextBlock Text="{Binding Monto, StringFormat=C}" FontWeight="Bold" FontSize="11"/>
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="2" HorizontalAlignment="Right">
+                                        <TextBlock Text="Diferencia:" FontSize="10" HorizontalAlignment="Right"/>
+                                        <TextBlock Text="{Binding Diferencia, StringFormat=C}" FontWeight="Black" FontSize="16" HorizontalAlignment="Right"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Window>
